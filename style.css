@@ -1,0 +1,127 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.display {
+  position: relative;
+  overflow: hidden;
+
+  height: 600px;
+  width: 90%;
+
+  border: 1px solid #DDD;
+  border-bottom: 15px solid rgb(35, 160, 35);
+
+  background: linear-gradient(#B7CEEB, #E0F6FF);
+}
+
+.score {
+  position: absolute;
+
+  left: 15px;
+  top: 5px;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.pipe {
+  width: 80px;
+
+  position: absolute;
+  bottom: 0;
+  right: 80px;
+}
+
+.mario {
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+
+  width: 150px;
+  height: 150px;
+  background-position: center;  
+  background-size: cover;
+  background-image: url('./images/mario.gif')
+}
+
+.mario.lose {
+  height: 110px;
+  width: 75px;
+  margin-left: 50px;
+  background-image: url('./images/game-over.png')
+}
+
+
+.jump {
+  animation: mario-jump-animation 0.8s ease-out;
+}
+
+.clouds {
+  position: absolute;
+  width: 550px;
+  top: 15px;
+
+  animation: clouds-animation 30s infinite linear;
+}
+
+.start-box {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 100;
+}
+
+.start-box h1 {
+  font-size: 40px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  color: #FFF;
+
+  text-transform: uppercase;
+}
+
+.start-box button {
+  height: 50px;
+  width: 200px;
+
+  background-color: #e03f00;
+  border: 1px solid #1b0101;
+  color: #fff;
+  
+  font-size: 20px;
+}
+
+@keyframes mario-jump-animation {
+  0% {
+    bottom: 0;
+  }
+  40% { 
+    bottom: 180px;
+  }
+  60% {
+    bottom: 180px;
+  }
+  100% {
+    bottom: 0;
+  }
+}
+
+@keyframes clouds-animation {
+  from {
+    right: -550px;
+  }
+  to {
+    right: 100% ;
+  }
+}
