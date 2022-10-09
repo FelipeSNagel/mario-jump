@@ -103,11 +103,12 @@ body {
 .start-box button {
   height: 50px;
   width: 200px;
+  border-radius: 8px;
 
-  background-color: #e03f00;
   border: 1px solid #1b0101;
-  color: #fff;
+  background-color: #e03f00;
   
+  color: #fff;
   font-size: 20px;
 }
 
@@ -169,12 +170,15 @@ body {
 .data textarea {
   width: 100%;
   height: 75px;
+  border-radius: 8px;
 
   border: none;
 }
 
 .data #chart-analytics {
-  margin-top: 15px;
-  background-color: #FFF;
   width: 100%;
+  margin-top: 15px;
+  border-radius: 8px;
+
+  background-color: #FFF;
 }
