@@ -17,6 +17,7 @@ let pipePosition = -80;
 let velocity = 5;
 let isJumping = 0;
 
+let chartAnalytics;
 let analytics = [];
 
 
@@ -146,7 +147,11 @@ const makeChart = () => {
     options: {}
   };
 
-  const myChart = new Chart(
+  if(chartAnalytics) {
+    chartAnalytics.destroy();
+  }
+
+  chartAnalytics = new Chart(
     document.getElementById('chart-analytics'),
     config
   );
