@@ -5,6 +5,8 @@ const score = document.querySelector('.score');
 const startBox = document.querySelector('.start-box');
 const startButton = document.querySelector('.start-box button');
 
+const boxAnalytics = document.querySelector('.data .analytics');
+
 const screeWidth = startBox.offsetWidth;
 
 let scoreAmount = 0;
@@ -13,11 +15,14 @@ let timer = 0;
 
 let pipePosition = -80;
 let velocity = 5;
+let isJumping = 0;
+
+let analytics = [];
 
 
 const pipeAnimation = () => {
 
-  if(scoreAmount % 1 == 0) {
+  if(timer % 100 == 0) {
     velocity++;
   }
 
@@ -55,10 +60,14 @@ const getRestartGame = () => {
 
 const jump = () => {
   if(playing) {
+    isJumping = 1;
+
     mario.classList.add("jump")
     
     setTimeout(() => {
       mario.classList.remove("jump")
+
+      isJumping = 0;
     }, 800)
   }
 }
@@ -78,6 +87,9 @@ const verifyColision = () => {
 
     playing = false;
 
+    boxAnalytics.innerHTML = JSON.stringify(analytics);
+    makeChart();
+
     getRestartGame();
   }
 
@@ -88,6 +100,57 @@ const calculateScore = () => {
   score.innerHTML = `Score: ${scoreAmount}`;
 }
 
+const setAnalytics = () => {
+  if(timer % 10 == 0) {
+    analytics.push({
+      isJumping,
+      pipePosition,
+      velocity
+    })
+  }
+}
+
+const makeChart = () => {
+  const labels = [
+    'velocity',
+    'pipePosition',
+    'isJumping',
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'velocity',
+      backgroundColor: '#551B14',
+      borderColor: '#551B14',
+      data: analytics.map(({ velocity }) => velocity),
+    },
+    {
+      label: 'pipePosition',
+      backgroundColor: '#568259',
+      borderColor: '568259',
+      data: analytics.map(({ pipePosition }) => pipePosition),
+    },
+    {
+      label: 'isJumping',
+      backgroundColor: '#E03F00',
+      borderColor: '#E03F00',
+      data: analytics.map(({ isJumping }) => isJumping),
+    }
+  ]
+  };
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {}
+  };
+
+  const myChart = new Chart(
+    document.getElementById('chart-analytics'),
+    config
+  );
+}
 
 const loop = () => {
 
@@ -95,6 +158,7 @@ const loop = () => {
     verifyColision();
     calculateScore();
     pipeAnimation();
+    setAnalytics();
 
     timer++;
   }

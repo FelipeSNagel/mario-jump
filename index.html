@@ -1,14 +1,14 @@
 <html>
   <head>
     <title>Mario Game</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel="stylesheet" href="style.css">
     <script src="./script.js" defer></script>
   </head>
 
   <body>
     <section class="display">
-
-      
       <img src="./images/pipe.png" class="pipe"/>
       <img src="./images/clouds.png" class="clouds"/>
       <div class="mario"></div>
@@ -19,6 +19,15 @@
         <h1>Mario Jump</h1>
       <button>start</button>
       </div>
+    </section>
+
+    <section class="data">
+      <h3>Dados do Jogo</h3>
+
+      <label>Dados da jogada</label>
+      <textarea class="analytics"></textarea>
+
+      <canvas id="chart-analytics"></canvas>
     </section>
   </body>
 
